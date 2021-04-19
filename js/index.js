@@ -14,15 +14,12 @@ function getSingleBook(id) {
     let URL = `${initial_URL}/${id}`
     return fetch(URL)
     .then(resp => resp.json())
-    .then(console.log(`${id}`))
 }
-
-console.log(getSingleBook(1))
-console.log(showBookDetails)
 
 function createBookList(bookData) {
     const list = document.getElementById('list'),
     title = document.createElement('li');
+    title.id = `${bookData.id}`
 
     title.textContent = bookData.title;
     list.appendChild(title)
@@ -43,7 +40,7 @@ function showList(booksObj) {
 
 function createBookPopUp(bookData) {
     const panel = document.getElementById('show-panel'),
-    img = document.createElement('img').src,
+    img = document.createElement('img'),
     title = document.createElement('h4'),
     description = document.createElement('p'),
     usernameList = document.createElement('h4');
@@ -69,6 +66,6 @@ function showBookDetails(booksObj) {
 }
 
 function onBookClick(e) {
-    getSingleBook(e.target.dataset.id)
+    getSingleBook(e.target.id)
       .then(createBookPopUp)
 }
